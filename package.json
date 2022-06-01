@@ -13,6 +13,7 @@
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "morgan": "~1.9.1",
+    "mysql2": "^2.3.3",
     "node.js": "^0.0.1-security",
     "pug": "^3.0.2"
   }
