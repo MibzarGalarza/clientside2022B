@@ -6,7 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var languaesRouter = require('./routes/languages');
+var languagesRouter = require('./routes/languages');
 
 var app = express();
 
@@ -32,7 +32,7 @@ app.use('/css',express.static(__dirname+"/node_modules/bootstrap/dist/css"));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/languages', languaesRouter);
+app.use('/languages', languagesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
