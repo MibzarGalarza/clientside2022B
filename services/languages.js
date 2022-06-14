@@ -5,18 +5,21 @@ const config = require('../config');
 async function getMultiple(page = 1){
     const offset = helper.getOffset(page, config.listPerPage);
     const rows = await db.query(
-        `SELECT id, name, description, year 
+        `SELECT id, name, description, year
         FROM languages LIMIT ${offset}, ${config.listPerPage}
         `
+
     );
     const data = helper.emptyOrRows(rows);
-    const meta = (page);
+    const meta = {page};
 
     return {
-        data,
+        data, 
         meta
     }
 }
+
+
 
 async function create(language){
 
@@ -34,7 +37,7 @@ async function create(language){
 
 }
 
-async function update(language){
+async function update(id, language){
 
     const result = await db.query(
         `UPDATE languages
@@ -42,7 +45,8 @@ async function update(language){
         name = '${language.name}', 
         description = '${language.description}', 
         year = ${language.year}
-        WHERE id = ${id} `
+        WHERE id = ${id}
+        `
     );
 
     let message = "Error in updating a language";
@@ -54,10 +58,25 @@ async function update(language){
 
 }
 
+async function remove(id){
 
-module.exports = {
-    getMultiple,
+    const result = await db.query(
+        `DELETE FROM languages WHERE id = ${id}
+        `
+    );
+
+    let message = "Error in delating a language";
+    if(result.affectedRows){
+        message = "A language has been deleted";
+    }
+
+    return{ message }
+
+}
+
+module.exports = { 
+    getMultiple, 
     create,
-    update
+    update, 
+    remove
 };
-
