@@ -1,20 +1,44 @@
-const { request } = require('express');
 var express = require('express');
 var router = express.Router();
 
-const lenguages = require('../services/languages');
+const languages = require('../services/languages');
 
-/* GET leguages listing. */
+/* GET languages listing. */
 router.get('/', async function(req, res, next) {
-  try{
-    res.json(await lenguages.getMultiple(req.query.page));
-  }
-  catch(err){
-    console.error('Error' + err.message);
-    next(err);
-  }
+    try{
+        res.json(await languages.getMultiple(req.query.page));
+    }catch(err){
+        console.error('Error' + err.message);
+        next(err);
+    }
 });
 
+router.get('/permissions', function(req, res, next) {
+  res.render("permissions");
+});
 
+router.post('/', async function(req, res, next){
+
+    try{
+        res.json(await languages.create(req.body));
+    }
+    catch(error){
+        console.log("Error while creating a language", error.message);
+        next(error);
+    }
+
+});
+
+router.put('/:id', async function(req, res, next){
+
+    try{
+        res.json(await languages.update(req.params.id, req.body));
+    }
+    catch(error){
+        console.log("Error while updating a language", error.message);
+        next(error);
+    }
+
+});
 
 module.exports = router;
