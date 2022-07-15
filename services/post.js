@@ -4,11 +4,11 @@ const config = require('../config');
 
 
 
-async function getUser(page = 1){
+async function getPost(page = 1){
     const offset = helper.getOffset(page, config.listPerPage);
     const rows = await db.query(
-        `SELECT id, username, password, email, role
-        FROM users LIMIT ${offset}, ${config.listPerPage}
+        `SELECT tittle, description, date, user, section, comment , id
+        FROM post LIMIT ${offset}, ${config.listPerPage}
         `
     );
     const data = helper.emptyOrRows(rows);
@@ -21,5 +21,5 @@ async function getUser(page = 1){
 }
 
 module.exports = {
-    getUser
+    getPost
 };

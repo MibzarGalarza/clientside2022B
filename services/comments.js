@@ -4,11 +4,11 @@ const config = require('../config');
 
 
 
-async function getUser(page = 1){
+async function getComment(page = 1){
     const offset = helper.getOffset(page, config.listPerPage);
     const rows = await db.query(
-        `SELECT id, username, password, email, role
-        FROM users LIMIT ${offset}, ${config.listPerPage}
+        `SELECT id, comment, user, idpost
+        FROM comments LIMIT ${offset}, ${config.listPerPage}
         `
     );
     const data = helper.emptyOrRows(rows);
@@ -21,5 +21,5 @@ async function getUser(page = 1){
 }
 
 module.exports = {
-    getUser
+    getComment
 };
