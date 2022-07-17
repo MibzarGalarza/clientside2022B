@@ -19,7 +19,6 @@ async function getPost(page = 1){
         meta
     }
 }
-
 module.exports = {
     getPost
 };
