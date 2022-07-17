@@ -16,7 +16,6 @@ router.get('/', async function(req, res, next) {
 router.get('/permissions', function(req, res, next) {
   res.render("permissions");
 });
-
 router.post('/', async function(req, res, next){
 
     try{
@@ -28,7 +27,6 @@ router.post('/', async function(req, res, next){
     }
 
 });
-
 router.put('/:id', async function(req, res, next){
 
     try{
@@ -38,7 +36,6 @@ router.put('/:id', async function(req, res, next){
         console.log("Error while updating a language", error.message);
         next(error);
     }
-
 });
 
 router.delete('/:id', async function(req, res, next){
@@ -50,9 +47,6 @@ router.delete('/:id', async function(req, res, next){
         console.log("Error while delating a language", error.message);
         next(error);
     }
-
 });
-
-
 
 module.exports = router;
